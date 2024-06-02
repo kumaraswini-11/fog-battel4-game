@@ -23,7 +23,9 @@ function Breadcrumb() {
         <span>
           <img src={BackSpace} alt="Back Space" />
         </span>
-        <label className="ml-4 text-sm hover:font-semibold">MultiPlayer</label>
+        <label className="ml-4 text-xs uppercase hover:font-semibold">
+          MultiPlayer
+        </label>
         <span className="mx-2">/</span>
       </div>
       <label className="text-3xl font-medium uppercase">QuickMatch</label>

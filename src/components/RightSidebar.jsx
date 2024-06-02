@@ -73,9 +73,11 @@ function RightSidebar() {
             </div>
             <div
               className={`flex w-full items-center justify-start gap-1 hover:bg-white hover:text-black ${
-                index !== 0 && selected === index
-                  ? "border-l-3 border-l-green-700"
-                  : "border-l-3 border-l-white"
+                index === 0
+                  ? ""
+                  : selected === index
+                    ? "border-l-4 border-l-green-500"
+                    : "border-l-4 border-l-white"
               } ${selected === index ? "border-l-2 border-l-green-500" : ""}`}
               onClick={() => setSelected(index)}
             >

@@ -178,7 +178,7 @@ const navItems = [
 
 function App() {
   return (
-    <main className="relative h-full w-full overflow-hidden font-serif">
+    <main className="relative h-full w-full overflow-hidden">
       <div
         className="absolute inset-0 z-0 h-full w-full bg-cover bg-fixed bg-center bg-no-repeat blur-md"
         style={{ backgroundImage: `url(${BackgroundImage})` }}
