@@ -1,22 +1,51 @@
 import { useState } from "react";
-import LeftSidebarIcon1 from "../assets/asset 30.svg";
-import LeftSidebarIcon2 from "../assets/asset 33.svg";
-import LeftSidebarIcon3 from "../assets/asset 35.svg";
-import RightSidebarPhoto1 from "../assets/OnlineIcon.png";
-import RightSidebarPhoto2 from "../assets/OfflineIcon.png";
-import PlusIconGray from "../assets/asset 32.svg";
+import squadIcon from "../assets/asset 30.svg";
+import onlineIcon from "../assets/asset 33.svg";
+import offlineIcon from "../assets/asset 35.svg";
+import onlineStatusIcon from "../assets/OnlineIcon.png";
+import offlineStatusIcon from "../assets/OfflineIcon.png";
+import plusIcon from "../assets/asset 32.svg";
+
+const SidebarItem = ({ show, item, selected, onClick, index }) => (
+  <div className="mt-6">
+    {show && <hr className="my-2 rounded border-gray-700" />}
+    <div className="flex flex-col items-start justify-start gap-1 pl-2 text-sm">
+      <div className="flex w-full items-center justify-start gap-1">
+        {item.icon1}
+        {show && <span className="w-full font-semibold">{item.label1}</span>}
+      </div>
+      <div
+        className={`flex w-full items-center justify-start gap-1 hover:bg-white hover:text-black ${
+          index === 0
+            ? ""
+            : selected
+              ? "border-l-2 border-l-green-500"
+              : "border-l-2 border-l-white"
+        }`}
+        onClick={onClick}
+      >
+        {item.icon2}
+        {show && (
+          <label className="flex flex-1 flex-col items-start justify-center font-medium leading-none">
+            {item.label2}
+          </label>
+        )}
+      </div>
+    </div>
+  </div>
+);
 
 function RightSidebar() {
-  const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState(1);
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(1);
 
   const items = [
     {
-      icon1: <img src={LeftSidebarIcon1} alt="Squad Icon" />,
+      icon1: <img src={squadIcon} alt="Squad Icon" />,
       label1: "SQUAD",
       icon2: (
         <img
-          src={PlusIconGray}
+          src={plusIcon}
           alt="Plus Icon"
           height={32}
           width={32}
@@ -26,28 +55,26 @@ function RightSidebar() {
       label2: "Squad Join",
     },
     {
-      icon1: <img src={LeftSidebarIcon2} alt="Online Icon" />,
+      icon1: <img src={onlineIcon} alt="Online Icon" />,
       label1: "Online",
-      icon2: (
-        <img src={RightSidebarPhoto1} alt="Online" height={32} width={32} />
-      ),
+      icon2: <img src={onlineStatusIcon} alt="Online" height={32} width={32} />,
       label2: (
         <>
           <span>MaryJain</span>
-          <span>Online</span>
+          <span className="text-xs text-gray-400">Online</span>
         </>
       ),
     },
     {
-      icon1: <img src={LeftSidebarIcon3} alt="Offline Icon" />,
+      icon1: <img src={offlineIcon} alt="Offline Icon" />,
       label1: "Offline",
       icon2: (
-        <img src={RightSidebarPhoto2} alt="Offline" height={32} width={32} />
+        <img src={offlineStatusIcon} alt="Offline" height={32} width={32} />
       ),
       label2: (
         <>
           <span>420</span>
-          <span>Offline</span>
+          <span className="text-xs text-gray-400">Offline</span>
         </>
       ),
     },
@@ -55,41 +82,19 @@ function RightSidebar() {
 
   return (
     <section
-      className={`h-full transition-all duration-300 ease-in-out ${
-        show ? "w-56 bg-[#1F2022]" : "w-16"
-      }`}
-      onMouseOver={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
+      className={`h-full transition-all duration-300 ease-in-out ${isSidebarVisible ? "w-56 bg-[#1F2022] opacity-85" : "w-16"}`}
+      onMouseOver={() => setSidebarVisible(true)}
+      onMouseLeave={() => setSidebarVisible(false)}
     >
       {items.map((item, index) => (
-        <div key={index + 1} className="mt-6">
-          {show && <hr className="my-2 rounded border-gray-700" />}
-          <div
-            className={`flex flex-col items-start justify-start gap-1 pl-2 text-sm`}
-          >
-            <div className="flex w-full items-center justify-start gap-1">
-              {item.icon1}
-              {show && <span className="w-full">{item.label1}</span>}
-            </div>
-            <div
-              className={`flex w-full items-center justify-start gap-1 hover:bg-white hover:text-black ${
-                index === 0
-                  ? ""
-                  : selected === index
-                    ? "border-l-4 border-l-green-500"
-                    : "border-l-4 border-l-white"
-              } ${selected === index ? "border-l-2 border-l-green-500" : ""}`}
-              onClick={() => setSelected(index)}
-            >
-              {item.icon2}
-              {show && (
-                <label className="flex flex-1 flex-col font-medium">
-                  {item.label2}
-                </label>
-              )}
-            </div>
-          </div>
-        </div>
+        <SidebarItem
+          key={index}
+          show={isSidebarVisible}
+          item={item}
+          selected={selectedIndex === index}
+          onClick={() => setSelectedIndex(index)}
+          index={index}
+        />
       ))}
     </section>
   );

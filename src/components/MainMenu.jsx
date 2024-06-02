@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BackSpace from "../assets/asset 0.svg";
+import backSpaceIcon from "../assets/asset 0.svg";
 
 function MainMenu({ navItems }) {
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -21,7 +21,7 @@ function Breadcrumb() {
     <div className="flex flex-col text-white">
       <div className="flex items-center">
         <span>
-          <img src={BackSpace} alt="Back Space" />
+          <img src={backSpaceIcon} alt="Back Space" />
         </span>
         <label className="ml-4 text-xs uppercase hover:font-semibold">
           MultiPlayer
@@ -39,7 +39,7 @@ function MenuSection({ hoveredItem, setHoveredItem, navItems }) {
       <nav className="h-[61.5%] w-72 overflow-y-auto text-xs uppercase">
         {navItems.map((item, index) => (
           <div
-            key={index + 1}
+            key={index}
             className="group relative"
             onMouseEnter={() => setHoveredItem(item)}
             onMouseLeave={() => setHoveredItem(null)}
@@ -47,15 +47,17 @@ function MenuSection({ hoveredItem, setHoveredItem, navItems }) {
             <div className="relative">
               <hr className="rounded border-gray-700 transition-colors duration-200 group-hover:border-white" />
               <label
-                className={`block cursor-pointer px-2 py-3 transition-colors duration-200 group-hover:bg-white group-hover:text-black ${[1, 2, 3].includes(index + 1) ? "text-orange-500" : "text-white"}`}
+                className={`block cursor-pointer px-2 py-3 font-semibold transition-colors duration-200 group-hover:bg-white group-hover:text-black ${
+                  [1, 2, 3].includes(index + 1)
+                    ? "text-orange-500"
+                    : "text-white"
+                }`}
               >
                 {item.label}
               </label>
             </div>
           </div>
         ))}
-        {/* custom scroll bar */}
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-1 bg-white opacity-50"></div>
       </nav>
 
       <article className="ml-9 w-[500px]">
@@ -63,7 +65,9 @@ function MenuSection({ hoveredItem, setHoveredItem, navItems }) {
           <div>
             <img src={hoveredItem.image} alt={hoveredItem.label} />
             <h2 className="mt-4 text-xl font-semibold">{hoveredItem.label}</h2>
-            <p>{hoveredItem.description}</p>
+            <p className="mt-2 text-sm text-gray-300">
+              {hoveredItem.description}
+            </p>
           </div>
         )}
       </article>

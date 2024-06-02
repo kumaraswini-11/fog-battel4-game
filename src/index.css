@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+  border: 1px solid red;
+} */
+
 html {
   font-family: "Rajdhani", sans-serif;
   font-size: 14px;
@@ -12,30 +16,15 @@ html {
   /* cursor: none; */
 }
 
-/* 
-:root {
-  --primary: gray;
-  --secondary: width;
+::-webkit-scrollbar {
+  width: 1px;
 }
-
-/* Firefox *
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--secondary) var(--primary);
+::-webkit-scrollbar-track {
+  background: #252c30;
 }
-
-/* Chrome, Edge, and Safari *
-*::-webkit-scrollbar {
-  width: 5px;
+::-webkit-scrollbar-thumb {
+  background: white;
 }
-
-*::-webkit-scrollbar-track {
-  background: var(--primary);
-  border-radius: 5px;
+::-webkit-scrollbar-thumb:hover {
+  background-color: white;
 }
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
-  border-radius: 14px;
-  border: 3px solid var(--primary);
-} */
